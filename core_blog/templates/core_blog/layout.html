@@ -32,6 +32,7 @@
     <!-- Navigation -->
     {% include 'core_blog/navbar.html' %}
 
+    {% block header %}
     <!-- Page Header -->
     <header class="masthead" style="background-image: url({% static 'core_blog/img/home-bg.jpg' %} )">
       <div class="overlay"></div>
@@ -46,6 +47,7 @@
         </div>
       </div>
     </header>
+    {% endblock header %}
 
     {% block content %}
     {% endblock content %}
