@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="row h-100 justify-content-center align-items-center">
-    <form id="editor" action="." method="POST">
+    <form id="editor" action="." method="POST" novalidate>
         {% csrf_token %}
         {{ form| crispy }}
         <input type="submit" value="Submit" />

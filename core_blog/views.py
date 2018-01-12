@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 
-from . import models
+from . import forms
 
 
 class HomeView(TemplateView):
@@ -9,6 +9,9 @@ class HomeView(TemplateView):
 
 
 class CreatePost(CreateView):
-    model = models.Post
-    fields = '__all__'
+    form_class = forms.CreatePostForm
     template_name = 'core_blog/create_post.html'
+
+
+class AboutView(TemplateView):
+    template_name = 'core_blog/about.html'
