@@ -3,6 +3,7 @@ from django.conf import settings
 
 
 class Post(models.Model):
+    content = models.TextField(default='')
     description = models.TextField(max_length=250, blank=True, null=True)
     title = models.CharField(max_length=150)
     slug = models.SlugField(unique=True)
