@@ -1,6 +1,7 @@
-{% extends "core_blog/post.html" %}
+{% extends "core_blog/layout.html" %}
 {% load static %}
 
+{% block header %}
   <!-- Page Header -->
     <header class="masthead" style="background-image: url({% static 'core_blog/img/post-bg.jpg' %} )">
       <div class="overlay"></div>
@@ -8,17 +9,19 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
-              <h1>Man must explore, and this is exploration at its greatest</h1>
-              <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
+              <h1>{{ post.title }}</h1>
+              <h2 class="subheading">{{ post.description }}</h2>
               <span class="meta">Posted by
-                <a href="#">Start Bootstrap</a>
-                on August 24, 2017</span>
+                <a href="#">{{ post.author|capfirst }}</a>
+                on {{ post.created_at|date:'F d, Y' }}</span>
             </div>
           </div>
         </div>
       </div>
     </header>
+{% endblock header %}
 
+{% block content %}
     <!-- Post Content -->
     <article>
       <div class="container">
@@ -64,53 +67,4 @@
         </div>
       </div>
     </article>
-
-    <hr>
-
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <ul class="list-inline text-center">
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-            </ul>
-            <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/clean-blog.min.js"></script>
-
-  </body>
-
-</html>
+{% endblock content %}
