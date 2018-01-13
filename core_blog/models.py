@@ -22,8 +22,8 @@ class Post(models.Model):
     hits = models.IntegerField(default=0)
     draft = models.BooleanField(default=False)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, default=1,
-        on_delete=models.SET_DEFAULT
+            settings.AUTH_USER_MODEL, default=1,
+            on_delete=models.SET_DEFAULT
         )
 
     def __str__(self):
