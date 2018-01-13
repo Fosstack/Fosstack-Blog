@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Clean Blog - Start Bootstrap Theme</title>
+    <title>Fosstack Blog</title>
 
     <!-- Bootstrap core CSS -->
 
@@ -30,7 +30,7 @@
 
   <body>
     <!-- Navigation -->
-    {% include 'core_blog/navbar.html' %}
+    {% include 'core_blog/blocks/navbar.html' %}
 
     {% block header %}
     <!-- Page Header -->
@@ -52,7 +52,7 @@
     {% block content %}
     {% endblock content %}
 
-    {% include 'core_blog/footer.html' %}
+    {% include 'core_blog/blocks/footer.html' %}
 
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'core_blog/vendor/jquery/jquery.min.js' %}"></script>
