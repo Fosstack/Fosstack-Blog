@@ -19,7 +19,7 @@ class PostDetailView(DetailView):
     template_name = 'core_blog/post_detail.html'
 
 
-class CreatePost(CreateView):
+class CreatePostView(CreateView):
     form_class = forms.CreatePostForm
     success_url = '/'
     template_name = 'core_blog/post_form.html'
