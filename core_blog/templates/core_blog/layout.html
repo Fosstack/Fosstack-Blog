@@ -23,8 +23,10 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'core_blog/css/clean-blog.min.css' %}" rel="stylesheet">
-     <link href="{% static "styles/github.css" %}" rel="stylesheet">
+    <link href="{% static 'core_blog/styles/github.css' %}" rel="stylesheet">
 
+    {% block css %}
+    {% endblock css %}
 
   </head>
 
