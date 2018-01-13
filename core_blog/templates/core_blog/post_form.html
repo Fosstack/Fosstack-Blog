@@ -17,9 +17,16 @@
     <form  method="post" action='' enctype="multipart/form-data">
         {% csrf_token %}    {{ form.media }}
         {{ form| crispy }}
-        <input type="submit" value="Save" />
+        <button type="submit" class="btn btn-success">Save</button>
+        {% if update_page %}
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        {% endif    %}
     </form>
 </div>
+
+
+{% include 'core_blog/blocks/confirm_modal.html' %}
+
 {% endblock content %}
 
 {% block js %}
