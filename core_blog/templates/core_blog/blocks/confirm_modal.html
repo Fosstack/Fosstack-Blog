@@ -12,8 +12,11 @@
         Are you sure you want to delete this post ?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancle</button>
-        <a href="./delete"><button type="button" class="btn btn-danger">Delete</button></a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <form action="{% url 'post_delete' post.slug %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Confirm"/>
+        </form>
       </div>
     </div>
   </div>

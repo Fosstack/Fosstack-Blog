@@ -1,9 +1,11 @@
+from django.http import Http404
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
-from django.shortcuts import  get_object_or_404, redirect
 
 from . import forms
 from . import models
@@ -34,7 +36,7 @@ class AboutView(TemplateView):
 class PostUpdateView(UpdateView):
     model = models.Post
     fields = '__all__'
-    success_url = '/'
+    context_object_name = 'post'
     template_name = 'core_blog/post_form.html'
 
     def get_context_data(self, **kwargs):
@@ -43,7 +45,12 @@ class PostUpdateView(UpdateView):
         return context
 
 
-def PostDeleteView(request, slug=None):
-    x = get_object_or_404(models.Post,slug=slug).delete()
-    return redirect('/')
+class PostDeleteView(DeleteView):
+    model = models.Post
+    success_url = reverse_lazy('post_list')
 
+    def get_object(self, queryset=None):
+        post = super().get_object()
+        if not post.author == self.request.user:
+            raise Http404
+        return post

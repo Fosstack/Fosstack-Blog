@@ -11,24 +11,19 @@
 {% endblock css %}
 
 {% block content %}
-
-
-<div class="row h-100 justify-content-center align-items-center">
+<div class="container">
     <form  method="post" action='' enctype="multipart/form-data">
         {% csrf_token %}    {{ form.media }}
         {{ form| crispy }}
         <button type="submit" class="btn btn-success">Save</button>
         {% if update_page %}
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-        {% endif    %}
+        {% endif %}
     </form>
 </div>
-
-
-{% include 'core_blog/blocks/confirm_modal.html' %}
+{% if update_page %}
+    {% include 'core_blog/blocks/confirm_modal.html' %}
+{% endif %}
 
 {% endblock content %}
 
-{% block js %}
-
-{% endblock js %}
