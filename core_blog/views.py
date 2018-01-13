@@ -10,7 +10,8 @@ class HomeView(TemplateView):
 
 class CreatePost(CreateView):
     form_class = forms.CreatePostForm
-    template_name = 'core_blog/create_post.html'
+    success_url = '/'
+    template_name = 'core_blog/post_form.html'
 
 
 class AboutView(TemplateView):

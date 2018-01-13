@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'core_blog',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -120,8 +121,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
+STATICFILES_DIRS= [
+    os.path.join(BASE_DIR , "core_blog/static")
+]
+
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static_cdn")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),"media_cdn")
 # Crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
+TINYMCE_DEFAULT_CONFIG = {
+        'height': 360,
+        'width':1120,
+        'cleanup_on_startup': True,
+        'custom_undo_redo_levels': 20,
+        'selector': 'textarea',
+        'theme': 'modern',
+        'plugins': 'textcolor save link image media preview codesample contextmenu table code lists fullscreen  insertdatetime  nonbreaking contextmenu directionality searchreplace wordcount visualblocks visualchars code fullscreen autolink lists  charmap print  hr anchor pagebreak',
+        'toolbar1': 'save fullscreen bold italic underline,fontselect,fontsizeselect  | forecolor backcolor | alignleft aligncenter alignright alignjustify'
+        '| bullist numlist | outdent indent | table | link image media | codesample | preview code |',
+        'contextmenu': 'formats | link image',
+
+        'menubar': True,
+        'statusbar': True,
+
+}
