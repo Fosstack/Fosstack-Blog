@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core_blog',
     'tinymce',
     'filebrowser',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,8 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, "../static_cdn")
 MEDIA_ROOT = os.path.join(BASE_DIR, "../media_cdn")
 
+
+
 # Crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -147,3 +150,5 @@ TINYMCE_DEFAULT_CONFIG = {
         'statusbar': True,
 
 }
+
+MPTT_ADMIN_LEVEL_INDENT = 20
