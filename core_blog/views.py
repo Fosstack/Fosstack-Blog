@@ -1,11 +1,22 @@
-from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+from django.views.generic import TemplateView
 
 from . import forms
+from . import models
 
 
-class HomeView(TemplateView):
-    template_name = "core_blog/index.html"
+class ListPostView(ListView):
+    model = models.Post
+    context_object_name = 'posts'
+    template_name = 'core_blog/list_posts.html'
+
+
+class PostDetailView(DetailView):
+    model = models.Post
+    context_object_name = 'post'
+    template_name = 'core_blog/post_detail.html'
 
 
 class CreatePost(CreateView):
