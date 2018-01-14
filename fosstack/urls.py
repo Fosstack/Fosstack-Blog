@@ -7,8 +7,8 @@ from filebrowser.sites import site
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^', include('core_blog.urls')),
     re_path(r'^', include('back_office.urls')),
+    re_path(r'^', include('core_blog.urls')),
     re_path(r'^tinymce/', include('tinymce.urls')),
     re_path(r'^admin/filebrowser/', site.urls),
 ]
