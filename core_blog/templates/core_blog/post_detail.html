@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% load static %}
+{% load disqus_tags %}
 
 {% block title %}
   {{ page_title }} - {{ block.super }}
@@ -31,6 +32,7 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             {{ post.content | safe }}
+            {% disqus_show_comments %}
           </div>
         </div>
       </div>
