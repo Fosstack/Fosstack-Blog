@@ -46,6 +46,9 @@ class Post(models.Model):
     def in_future(self):
         return (self.publish > date.today()) and not self.draft
 
+    class Meta:
+        ordering = ['-publish']
+
 
 class Category(MPTTModel):
     name = models.CharField(max_length=50, unique=True)
