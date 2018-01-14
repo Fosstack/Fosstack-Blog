@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '(nvt1yya(pzyv=^s!94jsk@7(ebaly2&n84@sh64(c+9v!p+_f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'debug_toolbar',
     'crispy_forms',
     'filebrowser',
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'core_blog',
     'back_office',
+    'disqus',
 ]
 
 MIDDLEWARE = [
@@ -164,3 +167,5 @@ TINYMCE_DEFAULT_CONFIG = {
 
 
 MPTT_ADMIN_LEVEL_INDENT = 20
+DISQUS_API_KEY = config('DISQUS_API_KEY')
+DISQUS_WEBSITE_SHORTNAME = config('DISQUS_WEBSITE_SHORTNAME')
