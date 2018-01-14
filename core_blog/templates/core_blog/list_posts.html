@@ -15,9 +15,6 @@
                       {% if post.in_future %}
                         <span style="color: orange">future Post</span>
                       {% endif %}
-                      {% if post.draft  %}
-                        <span style="color: red">draft</span>
-                      {% endif %}
                   </h6>
                   <h3 class="post-subtitle">
                     {{ post.description }}
@@ -25,7 +22,11 @@
                 </a>
                 <p class="post-meta">Posted by
                   <a href="#">{{ post.author|capfirst }}</a>
-                   on {{ post.publish|date:'F d, Y' }}</p>
+                   on {{ post.publish|date:'F d, Y' }}
+                   {% if post.draft  %}
+                        <span style="color: red">Draft</span>
+                   {% endif %}
+                 </p>
               </div>
 
           {% endfor %}
