@@ -17,6 +17,9 @@ class ListPostView(ListView):
     context_object_name = 'posts'
     template_name = 'core_blog/list_posts.html'
 
+    def get_querset(self):
+        return self.model.objects.select_related('author').all()
+
 
 class PostDetailView(PageTitleMixin, DetailView):
     model = models.Post
