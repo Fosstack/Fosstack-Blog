@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.urls import reverse
-from django.utils import timezone
+from datetime import date
 
 from tinymce import HTMLField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -12,7 +12,7 @@ from .utils import get_read_time
 
 class PostManager(models.Manager):
     def active(self, *args, **kwargs):
-        return super().filter(draft=False).filter(publish__lte=timezone.now())
+        return super().filter(draft=False).filter(publish__lte=date.today())
 
 
 class Post(models.Model):
@@ -41,6 +41,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
+
+    @property
+    def in_future(self):
+        return (self.publish > date.today()) and not self.draft
 
 
 class Category(MPTTModel):

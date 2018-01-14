@@ -15,6 +15,14 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
               <h1>{{ post.title }}</h1>
+              <h6 class="post-subtitle">
+                {% if post.in_future %}
+                  <span style="color: orange">future Post</span>
+                {% endif %}
+                {% if post.draft  %}
+                  <span style="color: red">draft</span>
+                {% endif %}
+              </h6>
               <h2 class="subheading">{{ post.description }}</h2>
               <span class="meta">Posted by
                 <a href="#">{{ post.author|capfirst }}</a>
@@ -30,11 +38,12 @@
     <article>
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post_detail col-lg-8 col-md-10 mx-auto">
             {{ post.content | safe }}
             {% disqus_show_comments %}
           </div>
         </div>
       </div>
     </article>
+
 {% endblock content %}

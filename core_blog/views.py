@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
+from django.utils import timezone
 
 from . import forms
 from . import models
@@ -33,7 +34,7 @@ class PostDetailView(PageTitleMixin, DetailView):
 
 
 class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
-    form_class = forms.CreatePostForm
+    form_class = forms.PostForm
     success_url = '/'
     page_title = 'Create Awesome Post'
     template_name = 'core_blog/post_form.html'
@@ -45,8 +46,8 @@ class AboutView(CsrfExemptMixin, PageTitleMixin, TemplateView):
 
 
 class PostUpdateView(IsStaffUserMixin, PageTitleMixin, UpdateView):
+    form_class = forms.PostForm
     model = models.Post
-    fields = '__all__'
     context_object_name = 'post'
     template_name = 'core_blog/post_form.html'
 

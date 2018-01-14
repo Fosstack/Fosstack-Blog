@@ -14,7 +14,7 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 
-class CreatePostForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
 
     content = forms.CharField(
         widget=TinyMCEWidget(
