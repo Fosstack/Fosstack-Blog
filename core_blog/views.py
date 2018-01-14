@@ -9,15 +9,15 @@ from django.views.generic.edit import UpdateView
 
 from . import forms
 from . import models
-from .mixins import IsStaffUserMixin, PageTitleMixin
+from .mixins import IsStaffUserMixin, PageTitleMixin, CsrfExemptMixin
 
 
-class ListPostView(ListView):
+class ListPostView(CsrfExemptMixin, ListView):
     model = models.Post
     context_object_name = 'posts'
     template_name = 'core_blog/list_posts.html'
 
-    def get_querset(self):
+    def get_queryset(self):
         return self.model.objects.select_related('author').all()
 
 
@@ -38,7 +38,7 @@ class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
     template_name = 'core_blog/post_form.html'
 
 
-class AboutView(PageTitleMixin, TemplateView):
+class AboutView(CsrfExemptMixin, PageTitleMixin, TemplateView):
     page_title = 'About'
     template_name = 'core_blog/about.html'
 
