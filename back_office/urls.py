@@ -5,6 +5,6 @@ from . import views
 app_name = 'back_office'
 
 urlpatterns = [
-    re_path(r'^contact/', views.CreateContactView.as_view()),
-    re_path(r'^about/', TemplateView.as_view(template_name='back_office/about.html')),
+    re_path(r'^contact/', views.CreateContactView.as_view(),name='contact'),
+    re_path(r'^about/', TemplateView.as_view(template_name='back_office/about.html'),name='about'),
 ]
