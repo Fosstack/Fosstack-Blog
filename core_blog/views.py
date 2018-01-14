@@ -15,6 +15,7 @@ from .mixins import IsStaffUserMixin, PageTitleMixin, CsrfExemptMixin
 class ListPostView(CsrfExemptMixin, ListView):
     model = models.Post
     context_object_name = 'posts'
+    paginate_by = 7
     template_name = 'core_blog/list_posts.html'
 
     def get_queryset(self):
