@@ -10,7 +10,12 @@ class TinyMCEWidget(TinyMCE):
         return False
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class CreatePostForm(forms.ModelForm):
+
     content = forms.CharField(
         widget=TinyMCEWidget(
             attrs={'required': False, 'cols': 30, 'rows': 10}
@@ -19,4 +24,6 @@ class CreatePostForm(forms.ModelForm):
 
     class Meta:
         model = models.Post
-        fields = ['content', 'description', 'title', 'slug']
+        fields = '__all__'
+        exclude = ['author', 'read_time', 'hits']
+        widgets = {'publish': DateInput()}

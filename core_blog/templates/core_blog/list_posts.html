@@ -17,7 +17,7 @@
                 </a>
                 <p class="post-meta">Posted by
                   <a href="#">{{ post.author|capfirst }}</a>
-                   on {{ post.created_at|date:'F d, Y' }}</p>
+                   on {{ post.publish|date:'F d, Y' }}</p>
               </div>
           {% endfor %}
           <!-- Pager -->
