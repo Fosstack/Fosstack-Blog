@@ -63,6 +63,9 @@ class PostDeleteView(IsStaffUserMixin, PageTitleMixin, DeleteView):
     model = models.Post
     success_url = reverse_lazy('blog:post_list')
 
+    def get(self, request, *args, **kwargs):
+        raise Http404
+
     def get_object(self, queryset=None):
         post = super().get_object()
         if not post.author == self.request.user:
