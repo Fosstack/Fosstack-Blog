@@ -1,9 +1,8 @@
 from django import forms
-from .models import Contact ,Subscribe
+from .models import Contact
 
 
-class contact_form(forms.ModelForm):
+class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-
-    fields = '__all__'
+        fields = '__all__'
