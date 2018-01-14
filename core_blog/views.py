@@ -9,6 +9,7 @@ from django.views.generic.edit import UpdateView
 
 from . import forms
 from . import models
+from .mixins import IsStaffUserMixin, PageTitleMixin
 
 
 class ListPostView(ListView):
@@ -17,27 +18,37 @@ class ListPostView(ListView):
     template_name = 'core_blog/list_posts.html'
 
 
-class PostDetailView(DetailView):
+class PostDetailView(PageTitleMixin, DetailView):
     model = models.Post
     context_object_name = 'post'
     template_name = 'core_blog/post_detail.html'
 
+    def get_page_title(self):
+        post = self.get_object()
+        return post.title
 
-class CreatePostView(CreateView):
+
+class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
     form_class = forms.CreatePostForm
     success_url = '/'
+    page_title = 'Create Awesome Post'
     template_name = 'core_blog/post_form.html'
 
 
-class AboutView(TemplateView):
+class AboutView(PageTitleMixin ,TemplateView):
+    page_title = 'About'
     template_name = 'core_blog/about.html'
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(IsStaffUserMixin, PageTitleMixin, UpdateView):
     model = models.Post
     fields = '__all__'
     context_object_name = 'post'
     template_name = 'core_blog/post_form.html'
+
+    def get_page_title(self):
+        post = self.get_object()
+        return 'Update {}'.format(post.title)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -45,7 +56,7 @@ class PostUpdateView(UpdateView):
         return context
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(IsStaffUserMixin, PageTitleMixin, DeleteView):
     model = models.Post
     success_url = reverse_lazy('post_list')
 

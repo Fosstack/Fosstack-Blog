@@ -2,6 +2,10 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+{% block title %}
+  {{ page_title }} - {{ block.super }}
+{% endblock title %}
+
 {% block css %}
     <style type="text/css">
         .asteriskField {

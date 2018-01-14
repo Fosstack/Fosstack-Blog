@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% load static %}
 
+{% block title %}
+  {{ page_title }} - {{ block.super }}
+{% endblock title %}
+
 {% block header %}
   <!-- Page Header -->
     <header class="masthead" style="background-color:cyan; )">
