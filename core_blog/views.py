@@ -61,7 +61,7 @@ class PostUpdateView(IsStaffUserMixin, PageTitleMixin, UpdateView):
 
 class PostDeleteView(IsStaffUserMixin, PageTitleMixin, DeleteView):
     model = models.Post
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('blog:post_list')
 
     def get_object(self, queryset=None):
         post = super().get_object()

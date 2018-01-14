@@ -13,7 +13,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <form action="{% url 'post_delete' post.slug %}" method="POST">
+        <form action="{% url 'blog:post_delete' post.slug %}" method="POST">
             {% csrf_token %}
             <input type="submit" class="btn btn-danger" value="Confirm"/>
         </form>
