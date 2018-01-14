@@ -11,6 +11,14 @@
                   <h2 class="post-title">
                     {{ post.title }}
                   </h2>
+                    <h6 class="post-subtitle">
+                      {% if post.in_future %}
+                        <span style="color: orange">future Post</span>
+                      {% endif %}
+                      {% if post.draft  %}
+                        <span style="color: red">draft</span>
+                      {% endif %}
+                  </h6>
                   <h3 class="post-subtitle">
                     {{ post.description }}
                   </h3>
@@ -19,6 +27,7 @@
                   <a href="#">{{ post.author|capfirst }}</a>
                    on {{ post.publish|date:'F d, Y' }}</p>
               </div>
+
           {% endfor %}
           <!-- Pager -->
           <div class="d-flex justify-content-between">
@@ -34,4 +43,5 @@
         </div>
       </div>
     </div>
+
 {% endblock content %}
