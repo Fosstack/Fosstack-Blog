@@ -2,11 +2,18 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.urls import reverse
+from django.utils import timezone
 
 from tinymce import HTMLField
 from mptt.models import MPTTModel, TreeForeignKey
 
 from .utils import get_read_time
+
+
+class PostManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(PostManager, self).filter(draft=False).filter(
+            publish__lte=timezone.now())
 
 
 class Post(models.Model):
@@ -19,13 +26,16 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    publish = models.DateField(auto_now=False, auto_now_add=False,)
     read_time = models.IntegerField(default=0)
     hits = models.IntegerField(default=0)
-    draft = models.BooleanField(default=False)
+    draft = models.BooleanField(default=True)
     author = models.ForeignKey(
             settings.AUTH_USER_MODEL, default=1,
             on_delete=models.SET_DEFAULT
         )
+
+    objects = PostManager()
 
     def __str__(self):
         return self.title

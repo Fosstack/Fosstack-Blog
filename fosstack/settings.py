@@ -27,7 +27,7 @@ SECRET_KEY = '(nvt1yya(pzyv=^s!94jsk@7(ebaly2&n84@sh64(c+9v!p+_f'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+SITE_ID = 1
 
 # Application definition
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'debug_toolbar',
     'crispy_forms',
     'filebrowser',
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE =  'Asia/Kolkata'
 
 USE_I18N = True
 
