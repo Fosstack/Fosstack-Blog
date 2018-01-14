@@ -1,10 +1,9 @@
-from django.urls import re_path
-from django.views.generic import TemplateView
+from django.urls import path
+
 from . import views
 
 app_name = 'back_office'
 
 urlpatterns = [
-    re_path(r'^contact/', views.CreateContactView.as_view(),name='contact'),
-    re_path(r'^about/', TemplateView.as_view(template_name='back_office/about.html'),name='about'),
+    path('contact', views.CreateContactView.as_view(), name='contact'),
 ]

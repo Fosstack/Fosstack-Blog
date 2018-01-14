@@ -35,7 +35,7 @@ class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
     template_name = 'core_blog/post_form.html'
 
 
-class AboutView(PageTitleMixin ,TemplateView):
+class AboutView(PageTitleMixin, TemplateView):
     page_title = 'About'
     template_name = 'core_blog/about.html'
 

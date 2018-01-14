@@ -37,13 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core_blog',
-    'back_office',
     'crispy_forms',
-    'tinymce',
     'filebrowser',
     'mptt',
+    'tinymce',
     'widget_tweaks',
+    'core_blog',
+    'back_office',
 ]
 
 MIDDLEWARE = [
