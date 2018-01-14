@@ -128,27 +128,33 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, "../static_cdn")
 MEDIA_ROOT = os.path.join(BASE_DIR, "../media_cdn")
 
-
-
 # Crispy form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 TINYMCE_DEFAULT_CONFIG = {
-        'height': 360,
-        'width':1120,
-        'cleanup_on_startup': True,
-        'custom_undo_redo_levels': 20,
-        'selector': 'textarea',
-        'theme': 'modern',
-        'plugins': 'textcolor save link image media preview codesample contextmenu table code lists fullscreen  insertdatetime  nonbreaking contextmenu directionality searchreplace wordcount visualblocks visualchars code fullscreen autolink lists  charmap print  hr anchor pagebreak',
-        'toolbar1': 'save fullscreen bold italic underline,fontselect,fontsizeselect  | forecolor backcolor | alignleft aligncenter alignright alignjustify'
-        '| bullist numlist | outdent indent | table | link image media | codesample | preview code |',
-        'contextmenu': 'formats | link image',
+    'height': 360,
+    'width': 1120,
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''save fullscreen bold italic underline, fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft aligncenter
+            alignright alignjustify| bullist numlist | outdent indent | table |
+            link image media | codesample | preview code |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+    }
 
-        'menubar': True,
-        'statusbar': True,
-
-}
 
 MPTT_ADMIN_LEVEL_INDENT = 20
