@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'debug_toolbar',
+    'django_extensions',
     'crispy_forms',
     'filebrowser',
     'mptt',
