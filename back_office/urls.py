@@ -15,7 +15,7 @@ urlpatterns = [
     path('robots.txt', lambda r: HttpResponse(
         'User-agent: *\nDisallow:', content_type="text/plain")
     ),
-    path('subscribe', views.Subscribe, name='subscribe'),
+    path('subscribe', views.Subscribe.as_view(), name='subscribe'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]

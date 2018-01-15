@@ -4,9 +4,9 @@ from . import forms
 from . import models
 from core_blog.models import Post
 from django.http import JsonResponse
-from django.shortcuts import redirect
+from django.views import View
 from django.views.generic import TemplateView
-
+from django.http import Http404
 from core_blog.mixins import PageTitleMixin, CsrfExemptMixin
 
 
@@ -27,17 +27,19 @@ class PostSitemap(sitemaps.Sitemap):
         return obj.updated
 
 
-def Subscribe(request):
-    if request.method == 'POST':
+class Subscribe(View):
+    def get(self, request):
+        raise Http404
+
+    def post(self, request):
         email = request.POST['email']
         email_qs = models.Subscribe.objects.filter(email=email)
         if email_qs.exists():
             data = {"status": "404"}
-            return JsonResponse(data)
         else:
             data = {"status": "400"}
             models.Subscribe.objects.create(email=email)
-    return redirect('/')
+        return JsonResponse(data)
 
 
 class bad_request(CsrfExemptMixin, PageTitleMixin, TemplateView):

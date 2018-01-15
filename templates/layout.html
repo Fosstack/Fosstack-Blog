@@ -5,10 +5,30 @@
 
   <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c5c5c5">
+    <meta name="msapplication-navbutton-color" content="#FAFAFA">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#FAFAFA">
+    {% block seo_tags %}
+    <meta name="description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux, Python and Web Scraping." />
+    <meta name="keywords" content="Linux, Python, FOSS, Web Scraping, python 3, python, linux, unix,web crawling,webcrawling,webscraping " />
+    <meta name="author" content="Karan Suthar">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="3 days">
+    <!-- python,linux,FOSS -->
+    <!-- For Facebook -->
+    <meta property="og:title" content="Fosstack - A Linux & Python Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="https://fosstack.com" />
+    <meta property="og:description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux, Python and Web Scraping." />
+    <!-- For Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Fosstack - A Linux & Python Blog" />
+    <meta name="twitter:description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux, Python and tips" />
+    {% endblock %}
+
     <title>
     {% block title %}
       Fosstack Blog
@@ -26,11 +46,19 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'core_blog/css/clean-blog.min.css' %}" rel="stylesheet">
     <link href="{% static 'core_blog/css/github.css' %}" rel="stylesheet">
+    <link href="{% static 'app.css' %}" rel="stylesheet">
 
     {% block css %}
     {% endblock css %}
 
   </head>
+
+  <script>
+        function snake_alert(msg,nature) {
+          var x = document.getElementById("snackbar");
+        if(nature == 'success'){x.style.backgroundColor = "green";} else if(nature == 'warning'){x.style.backgroundColor = "orange";} else{x.style.backgroundColor = "red";}
+        x.innerHTML = msg;x.className = "show";setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);}
+  </script>
 
   <body>
     <!-- Navigation -->
@@ -64,12 +92,15 @@
     <script src="{% static 'core_blog/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'core_blog/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'core_blog/js/highlight.pack.js' %}"></script>
+    <script src="{% static 'app.js' %}"></script>
+
     <script>hljs.initHighlightingOnLoad();</script>
 
     {% block js %}
     <!-- Custom scripts for this template -->
     <script src="{% static 'core_blog/js/clean-blog.min.js' %}"></script>
     {% endblock js %}
+
 
   </body>
 
