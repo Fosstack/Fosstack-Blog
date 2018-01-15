@@ -9,10 +9,10 @@ from django.views.generic.edit import UpdateView
 
 from . import forms
 from . import models
-from .mixins import IsStaffUserMixin, PageTitleMixin, CsrfExemptMixin
+from .mixins import IsStaffUserMixin, PageTitleMixin
 
 
-class ListPostView(CsrfExemptMixin, ListView):
+class ListPostView(ListView):
     model = models.Post
     context_object_name = 'posts'
     paginate_by = 7
@@ -48,7 +48,7 @@ class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
     template_name = 'core_blog/post_form.html'
 
 
-class AboutView(CsrfExemptMixin, PageTitleMixin, TemplateView):
+class AboutView(PageTitleMixin, TemplateView):
     page_title = 'About'
     template_name = 'core_blog/about.html'
 
