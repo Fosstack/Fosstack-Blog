@@ -3,7 +3,14 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from filebrowser.sites import site
+from django.conf.urls import (
+    handler400, handler403, handler404, handler500
+)
 
+handler400 = 'back_office.views.bad_request'
+handler403 = 'back_office.views.permission_denied'
+handler404 = 'back_office.views.page_not_found'
+handler500 = 'back_office.views.server_error'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
