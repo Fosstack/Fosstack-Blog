@@ -6,7 +6,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
-from django.utils import timezone
 
 from . import forms
 from . import models
