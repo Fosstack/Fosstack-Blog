@@ -25,11 +25,20 @@ class ListPostView(CsrfExemptMixin, ListView):
 class PostDetailView(PageTitleMixin, DetailView):
     model = models.Post
     context_object_name = 'post'
+    page_title = ''
     template_name = 'core_blog/post_detail.html'
 
-    def get_page_title(self):
-        post = self.get_object()
-        return post.title
+    def get_object(self, queryset=None):
+        slug = self.kwargs['slug']
+        try:
+            post = self.model.objects.values(
+                'title', 'description', 'publish',
+                'author__username', 'content'
+                ).get(slug=slug)
+        except self.model.DoesNotExist:
+            raise Http404
+        self.page_title = post['title']
+        return post
 
 
 class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
