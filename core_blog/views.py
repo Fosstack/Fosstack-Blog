@@ -32,8 +32,8 @@ class PostDetailView(PageTitleMixin, DetailView):
         slug = self.kwargs['slug']
         try:
             post = self.model.objects.values(
-                'title', 'description', 'publish',
-                'author__username', 'content'
+                'title', 'description', 'publish', 'draft',
+                'author__username', 'content', 'slug'
                 ).get(slug=slug)
         except self.model.DoesNotExist:
             raise Http404
@@ -58,6 +58,14 @@ class PostUpdateView(IsStaffUserMixin, PageTitleMixin, UpdateView):
     model = models.Post
     context_object_name = 'post'
     template_name = 'core_blog/post_form.html'
+
+    def get(self, request, *args, **kwargs):
+        if (
+            request.user.is_superuser or
+            request.user == self.get_object().author
+        ):
+            return super().get(request, *args, **kwargs)
+        raise Http404
 
     def get_page_title(self):
         post = self.get_object()

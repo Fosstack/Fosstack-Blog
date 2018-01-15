@@ -26,6 +26,11 @@
                    {% if post.draft  %}
                         <span style="color: red">Draft</span>
                    {% endif %}
+                   {% if user.is_superuser or user == post.author %}
+                     &nbsp;<a href="{% url 'blog:post_update' post.slug %}">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </a>
+                   {% endif %}
                  </p>
               </div>
 
