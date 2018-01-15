@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
 from django.http import Http404
-from core_blog.mixins import PageTitleMixin, CsrfExemptMixin
+from core_blog.mixins import PageTitleMixin
 
 
 class CreateContactView(CreateView):
@@ -42,21 +42,21 @@ class Subscribe(View):
         return JsonResponse(data)
 
 
-class bad_request(CsrfExemptMixin, PageTitleMixin, TemplateView):
+class bad_request(PageTitleMixin, TemplateView):
     page_title = 'Bad Request'
     template_name = 'error_handler/bad_request.html'
 
 
-class permission_denied(CsrfExemptMixin, PageTitleMixin, TemplateView):
+class permission_denied(PageTitleMixin, TemplateView):
     page_title = 'Permission Denied'
     template_name = 'error_handler/permission_denied.html'
 
 
-class page_not_found(CsrfExemptMixin, PageTitleMixin, TemplateView):
+class page_not_found(PageTitleMixin, TemplateView):
     page_title = 'Page Not Found'
     template_name = 'error_handler/page_not_found.html'
 
 
-class server_error(CsrfExemptMixin, PageTitleMixin, TemplateView):
+class server_error(PageTitleMixin, TemplateView):
     page_title = 'Server Error'
     template_name = 'error_handler/server_errors.html'
