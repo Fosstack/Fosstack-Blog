@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto mb-3">
-        <form id="subscription_ajax" class="mb-4" method="post">
+        <form id="subscription_ajax" class="mb-4" method="post" novalidate>
           {% csrf_token %}
     <div class="input-group">
         <input type="email" id="sub_email" name="email" placeholder="Enter your email here" class="form-control border border-secondary" required="required">
