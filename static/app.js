@@ -5,6 +5,8 @@ $(document).ready(function(){
 });
 
 
+
+
 // using jQuery
 function getCookie(name) {
     var cookieValue = null;
@@ -52,14 +54,15 @@ $.ajaxSetup({
     });
 
     function handleFormSuccess(response){
-        if(response.status == 404) {
+        if(response.message == 'alreadyExists') {
             alert('Email already registered !','warning');
         }
-
-        else{
+        else if( response.message == 'successful'){
             alert('Your email is successfully subscribed','success');
         }
-
+        else if( response.message == 'invalid'){
+            alert('Enter a valid email address','error');s
+        }
     }
 
     function handleFormError(jqXHR, textStatus, errorThrown){
@@ -69,7 +72,6 @@ $.ajaxSetup({
 
         alert('Error occurred !','error');
     }
-
 
 
 

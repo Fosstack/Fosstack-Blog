@@ -33,7 +33,11 @@
                    {% endif %}
                  </p>
               </div>
-              <br><hr><br>
+              {% if  forloop.last %}
+                  <br>
+              {% else %}
+                <br><hr><br>
+              {% endif %}
           {% endfor %}
           <!-- Pager -->
           <div class="d-flex justify-content-between">
