@@ -12,8 +12,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#FAFAFA">
     {% block seo_tags %}
     <meta name="description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux, Python and Web Scraping." />
-    <meta name="keywords" content="Linux, Python, FOSS, Web Scraping, python 3, python, linux, unix,web crawling,webcrawling,webscraping " />
-    <meta name="author" content="Karan Suthar">
+    <meta name="keywords" content="Linux, Python, FOSS, Web Scraping, python 3, python, linux, unix django" />
     <meta name="robots" content="index, follow">
     <meta name="revisit-after" content="3 days">
     <!-- python,linux,FOSS -->
@@ -66,7 +65,7 @@
 
     {% block header %}
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url({% static 'core_blog/img/home-bg.jpg' %} )">
+    <header class="masthead" style="background-image: url({% static 'core_blog/img/home-bg1.jpg' %} )">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -80,6 +79,10 @@
       </div>
     </header>
     {% endblock header %}
+
+
+    {% include 'blocks/search.html' %}
+
 
     {% block content %}
     {% endblock content %}
