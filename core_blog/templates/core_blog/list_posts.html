@@ -21,12 +21,12 @@
                   </h3>
                 </a>
                 <p class="post-meta">Posted by
-                  <a href="#">{{ post.author|capfirst }}</a>
+                  <a href="#">{{ post.writer|capfirst }}</a>
                    on {{ post.publish|date:'F d, Y' }}
                    {% if post.draft  %}
                         <span style="color: red">Draft</span>
                    {% endif %}
-                   {% if user.is_superuser or user == post.author %}
+                   {% if user.is_superuser or user == post.writer %}
                      &nbsp;<a href="{% url 'blog:post_update' post.slug %}">
                       <i class="fa fa-pencil" aria-hidden="true"></i>
                       </a>

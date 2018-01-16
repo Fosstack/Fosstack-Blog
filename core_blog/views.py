@@ -1,3 +1,4 @@
+from django.db.models import F, Q
 from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
@@ -6,10 +7,10 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
+
 from . import forms
 from . import models
 from .mixins import IsStaffUserMixin, PageTitleMixin
-from django.db.models import Q
 
 
 class ListPostView(ListView):
@@ -19,7 +20,9 @@ class ListPostView(ListView):
     template_name = 'core_blog/list_posts.html'
 
     def get_queryset(self):
-        result = self.model.objects.select_related('author').all()
+        result = self.model.objects.annotate(
+            writer=F('author__username')
+        ).all()
         query = self.request.GET.get('q')
         if query:
             result = result.filter(
