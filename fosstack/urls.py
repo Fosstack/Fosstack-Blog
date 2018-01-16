@@ -7,7 +7,6 @@ from django.conf.urls import (
 )
 
 from filebrowser.sites import site
-
 from back_office import views as error_handler
 
 

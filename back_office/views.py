@@ -3,6 +3,8 @@ from django.http import Http404
 from django.http import JsonResponse
 from django.contrib import sitemaps
 from django.views.generic import TemplateView
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from django.views import View
 
 from . import forms
@@ -34,12 +36,16 @@ class SubscribeView(View):
 
     def post(self, request, *args, **kwargs):
         email = request.POST['email']
-        email_qs = models.Subscribe.objects.filter(email=email)
-        if email_qs.exists():
-            data = {"status": "404"}
-        else:
-            data = {"status": "400"}
-            models.Subscribe.objects.create(email=email)
+        try:
+            validate_email(email)
+            email_qs = models.Subscribe.objects.filter(email=email)
+            if email_qs.exists():
+                data = {"message": "alreadyExists"}
+            else:
+                data = {"message": "successful"}
+                models.Subscribe.objects.create(email=email)
+        except ValidationError:
+            data = {"message": "invalid"}
         return JsonResponse(data)
 
 
