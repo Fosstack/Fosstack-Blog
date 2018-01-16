@@ -9,13 +9,16 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="{% url 'blog:post_list' %}">Python</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog:about' %}">About</a>
+          <a class="nav-link" href="{% url 'blog:post_list' %}">Linux</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'blog:post_list' %}">Posts</a>
+          <a class="nav-link" href="{% url 'blog:post_list' %}">Tips</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'back_office:contact' %}">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'back_office:contact' %}">Contact</a>

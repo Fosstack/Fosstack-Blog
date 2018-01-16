@@ -6,10 +6,10 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
-
 from . import forms
 from . import models
 from .mixins import IsStaffUserMixin, PageTitleMixin
+from django.db.models import Q
 
 
 class ListPostView(ListView):
@@ -19,7 +19,14 @@ class ListPostView(ListView):
     template_name = 'core_blog/list_posts.html'
 
     def get_queryset(self):
-        return self.model.objects.select_related('author').all()
+        result = self.model.objects.select_related('author').all()
+        query = self.request.GET.get('q')
+        if query:
+            result = result.filter(
+                Q(title__icontains=query) |
+                (Q(content__icontains=query))
+            )
+        return result
 
 
 class PostDetailView(PageTitleMixin, DetailView):
