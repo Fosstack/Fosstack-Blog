@@ -1,13 +1,14 @@
 from django.views.generic.edit import CreateView
+from django.http import Http404
+from django.http import JsonResponse
 from django.contrib import sitemaps
+from django.views.generic import TemplateView
+from django.views import View
+
 from . import forms
 from . import models
-from core_blog.models import Post
-from django.http import JsonResponse
-from django.views import View
-from django.views.generic import TemplateView
-from django.http import Http404
 from core_blog.mixins import PageTitleMixin
+from core_blog.models import Post
 
 
 class CreateContactView(CreateView):
@@ -16,7 +17,7 @@ class CreateContactView(CreateView):
     template_name = 'back_office/contact.html'
 
 
-class PostSitemap(sitemaps.Sitemap):
+class PostSitemapView(sitemaps.Sitemap):
     priority = 0.5
     changefreq = 'daily'
 
@@ -27,11 +28,11 @@ class PostSitemap(sitemaps.Sitemap):
         return obj.updated
 
 
-class Subscribe(View):
-    def get(self, request):
+class SubscribeView(View):
+    def get(self, request, *args, **kwargs):
         raise Http404
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         email = request.POST['email']
         email_qs = models.Subscribe.objects.filter(email=email)
         if email_qs.exists():
@@ -42,21 +43,21 @@ class Subscribe(View):
         return JsonResponse(data)
 
 
-class bad_request(PageTitleMixin, TemplateView):
+class BadRequestView(PageTitleMixin, TemplateView):
     page_title = 'Bad Request'
     template_name = 'error_handler/bad_request.html'
 
 
-class permission_denied(PageTitleMixin, TemplateView):
+class PermissionDeniedView(PageTitleMixin, TemplateView):
     page_title = 'Permission Denied'
     template_name = 'error_handler/permission_denied.html'
 
 
-class page_not_found(PageTitleMixin, TemplateView):
+class PageNotFoundView(PageTitleMixin, TemplateView):
     page_title = 'Page Not Found'
     template_name = 'error_handler/page_not_found.html'
 
 
-class server_error(PageTitleMixin, TemplateView):
+class ServerErrorView(PageTitleMixin, TemplateView):
     page_title = 'Server Error'
     template_name = 'error_handler/server_errors.html'

@@ -7,7 +7,7 @@ from . import views
 app_name = 'back_office'
 
 sitemaps = {
-    'posts':  views.PostSitemap,
+    'posts':  views.PostSitemapView,
 }
 
 urlpatterns = [
@@ -15,7 +15,7 @@ urlpatterns = [
     path('robots.txt', lambda r: HttpResponse(
         'User-agent: *\nDisallow:', content_type="text/plain")
     ),
-    path('subscribe', views.Subscribe.as_view(), name='subscribe'),
+    path('subscribe', views.SubscribeView.as_view(), name='subscribe'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]
