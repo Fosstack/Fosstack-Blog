@@ -171,7 +171,8 @@ TINYMCE_DEFAULT_CONFIG = {
             visualchars code fullscreen autolink lists  charmap print  hr
             anchor pagebreak
             ''',
-    'toolbar1': '''save fullscreen bold italic underline, fontselect,
+    'toolbar1': '''
+            save fullscreen bold italic underline, fontselect,
             fontsizeselect  | forecolor backcolor | alignleft aligncenter
             alignright alignjustify| bullist numlist | outdent indent | table |
             link image media | codesample | preview code |
