@@ -31,6 +31,7 @@ SITE_ID = 1
 # Application definition
 
 INTERNAL_APPS = (
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -172,10 +173,14 @@ TINYMCE_DEFAULT_CONFIG = {
             anchor pagebreak
             ''',
     'toolbar1': '''
-            save fullscreen bold italic underline, fontselect,
-            fontsizeselect  | forecolor backcolor | alignleft aligncenter
-            alignright alignjustify| bullist numlist | outdent indent | table |
-            link image media | codesample | preview code |
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            ''',
+    'toolbar2': '''
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
             ''',
     'contextmenu': 'formats | link image',
     'menubar': True,

@@ -26,7 +26,8 @@ class ListPostView(ListView):
         if query:
             result = result.filter(
                 Q(title__icontains=query) |
-                (Q(content__icontains=query))
+                Q(content__icontains=query) |
+                Q(author__icontains=query)
             )
         return result
 
