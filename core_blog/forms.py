@@ -5,11 +5,6 @@ from tinymce import TinyMCE
 from . import models
 
 
-class TinyMCEWidget(TinyMCE):
-    def use_required_attribute(self, *args):
-        return False
-
-
 class DateInput(forms.DateInput):
     input_type = 'date'
 
@@ -17,7 +12,7 @@ class DateInput(forms.DateInput):
 class PostForm(forms.ModelForm):
 
     content = forms.CharField(
-        widget=TinyMCEWidget(
+        widget=TinyMCE(
             attrs={'required': False, 'cols': 30, 'rows': 10}
         )
     )

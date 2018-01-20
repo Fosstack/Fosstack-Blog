@@ -11,6 +11,7 @@ from back_office import views as error_handler
 
 
 urlpatterns = [
+    path('jet', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
     re_path(r'^', include('back_office.urls')),
     re_path(r'^', include('core_blog.urls')),
