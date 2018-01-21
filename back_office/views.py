@@ -2,6 +2,7 @@ from django.views.generic.edit import CreateView
 from django.http import Http404
 from django.http import JsonResponse
 from django.contrib import sitemaps
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import TemplateView
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -13,9 +14,13 @@ from core_blog.mixins import PageTitleMixin
 from core_blog.models import Post
 
 
-class CreateContactView(CreateView):
+class CreateContactView(SuccessMessageMixin, PageTitleMixin, CreateView):
     form_class = forms.ContactForm
+    page_title = 'Contact Us'
     success_url = '/'
+    success_message = (
+        'Thanks for contacting us, We will get back to you as soon as possible'
+    )
     template_name = 'back_office/contact.html'
 
 
