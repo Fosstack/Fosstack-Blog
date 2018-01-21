@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
-from django.shortcuts import redirect, reverse, get_object_or_404
+from django.shortcuts import get_object_or_404
 
 from . import forms
 from . import models
@@ -20,9 +20,14 @@ class ListPostView(ListView):
     paginate_by = 7
 
     def get_queryset(self):
-        result = self.model.objects.annotate(
-            writer=F('author__username')
-        ).all()
+        if self.request.user.is_authenticated:
+            result = self.model.objects.annotate(
+                writer=F('author__username')
+            )
+        else:
+            result = self.model.objects.active().annotate(
+                writer=F('author__username')
+            )
 
         # search filter
         query = self.request.GET.get('q')
@@ -32,16 +37,12 @@ class ListPostView(ListView):
                 Q(content__icontains=query) |
                 Q(author__icontains=query)
             )
-
-        print(self.kwargs)
-
         try:
             tag = self.kwargs['tag']
         except KeyError:
             pass
         else:
             result = result.filter(tags__name__in=[tag])
-
         return result
 
 
@@ -55,7 +56,6 @@ class ListCategoryView(DetailView):
         parent = None
         root = self.model.objects.all()
 
-        print(category_slug)
         for slug in category_slug:
             parent = get_object_or_404(root, slug=slug, parent=parent)
         return parent
