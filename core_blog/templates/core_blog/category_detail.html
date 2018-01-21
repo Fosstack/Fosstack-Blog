@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% load static  %}
+
+{% block head_title %} {{  category.name }} {% endblock %}
+
+
+ {% block header %}
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url({% static 'core_blog/img/home-bg1.jpg' %} )">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>{{category.name | capfirst }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% endblock header %}
+
+
+{% block content %}
+
+{% if  category.children.all %}
+    {% for i in category.children.all %}
+        <a href="{{ i.slug }}">  </a><br>
+    <div class="row">
+        <div class="col-lg-4 col-md-5 mx-auto">
+        <div class="card">
+         <a href={{ i.get_absolute_url }}
+         <div class="card-body">
+            <h5 style="text-align:center" class="card-title">{{ i.name | capfirst }}</h5>
+          </div>
+        </a>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<hr>
+    {% if   category.post_set.all %}
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in  category.post_set.all %}
+            <div class="post-preview">
+                <a href="{{ post.get_absolute_url }}">
+                  <h2 class="post-title">
+                    {{ post.title }}
+                  </h2>
+                    <h6 class="post-subtitle">
+                      {% if post.in_future %}
+                        <span style="color: orange">future Post</span>
+                      {% endif %}
+                  </h6>
+                  <h3 class="post-subtitle">
+                    {{ post.description }}
+                  </h3>
+                </a>
+              </div>
+              {% if  forloop.last %}
+                  <br>
+              {% else %}
+                <br><hr><br>
+              {% endif %}
+          {% endfor %}
+          <!-- Pager -->
+          <div class="d-flex justify-content-between">
+            {% if is_paginated %}
+              {% if page_obj.has_previous %}
+                  <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">Newer Posts &larr;</a>
+              {% endif %}
+              {% if page_obj.has_next %}
+                  <a class="btn btn-primary ml-auto" href="?page={{ page_obj.next_page_number }}">Older Posts &rarr;</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+
