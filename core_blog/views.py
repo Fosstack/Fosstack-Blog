@@ -52,7 +52,6 @@ class PostDetailView(PageTitleMixin, DetailView):
 
 class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
     form_class = forms.PostForm
-    success_url = '/'
     page_title = 'Create Awesome Post'
     template_name = 'core_blog/post_form.html'
 

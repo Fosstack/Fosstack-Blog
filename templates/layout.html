@@ -90,14 +90,15 @@
     <script src="{% static 'core_blog/js/highlight.pack.js' %}"></script>
     <script src="{% static 'app.js' %}"></script>
 
-    <script>hljs.initHighlightingOnLoad();
+    <script>hljs.initHighlightingOnLoad();</script>
 
-function snake_alert(msg,nature) { var x = document.getElementById("snackbar");
-        if(nature == 'success'){x.style.backgroundColor = "green";} else if(nature == 'warning'){x.style.backgroundColor = "orange";} else{x.style.backgroundColor = "red";}
-        x.innerHTML = msg;x.className = "show";setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-
-    </script>
+    {% if messages %}
+      <script>
+          {% for message in messages %};
+            Snackbar.show({text: "{{message}}" });
+          {% endfor %}
+      </script>
+    {% endif %}
 
     {% block js %}
     <!-- Custom scripts for this template -->
