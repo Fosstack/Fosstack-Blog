@@ -2,6 +2,10 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% block title %}
+  {{ page_title }} | {{ block.super }}
+{% endblock title %}
+
 {% block header %}
 
     <!-- Page Header -->
