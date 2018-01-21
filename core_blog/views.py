@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
-from django.shortcuts import redirect, reverse, get_object_or_404
+from django.shortcuts import get_object_or_404
 
 from . import forms
 from . import models
@@ -45,7 +45,7 @@ class ListPostView(ListView):
         return result
 
 
-class ListCategoryView(DetailView):
+class CategoryDetailView(DetailView):
     model = models.Category
     context_object_name = 'category'
     page_title = ""
@@ -55,7 +55,6 @@ class ListCategoryView(DetailView):
         parent = None
         root = self.model.objects.all()
 
-        print(category_slug)
         for slug in category_slug:
             parent = get_object_or_404(root, slug=slug, parent=parent)
         return parent
