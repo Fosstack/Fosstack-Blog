@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save
 from django.urls import reverse
 from datetime import date
 
+from taggit.managers import TaggableManager
 from tinymce import HTMLField
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -33,7 +34,7 @@ class Post(models.Model):
             settings.AUTH_USER_MODEL, default=1,
             on_delete=models.SET_DEFAULT
         )
-
+    tags = TaggableManager()
     objects = PostManager()
 
     def __str__(self):
@@ -69,10 +70,14 @@ class Category(MPTTModel):
             ancestors = []
         else:
             ancestors = [i.slug for i in ancestors]
-        slugs = []
+        slug_string = []
         for i in range(len(ancestors)):
-            slugs.append('/'.join(ancestors[:i+1]))
-        return slugs
+            slug_string.append('/'.join(ancestors[:i+1]))
+        return slug_string
+
+    def get_absolute_url(self):
+        return reverse(
+            "blog:category", kwargs={'hierarchy': self.get_slug_list()[-1]})
 
     def __str__(self):
         return self.name

@@ -7,6 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
+from django.shortcuts import redirect, reverse, get_object_or_404
 
 from . import forms
 from . import models
@@ -22,6 +23,8 @@ class ListPostView(ListView):
         result = self.model.objects.annotate(
             writer=F('author__username')
         ).all()
+
+        # search filter
         query = self.request.GET.get('q')
         if query:
             result = result.filter(
@@ -29,7 +32,33 @@ class ListPostView(ListView):
                 Q(content__icontains=query) |
                 Q(author__icontains=query)
             )
+
+        print(self.kwargs)
+
+        try:
+            tag = self.kwargs['tag']
+        except KeyError:
+            pass
+        else:
+            result = result.filter(tags__name__in=[tag])
+
         return result
+
+
+class ListCategoryView(DetailView):
+    model = models.Category
+    context_object_name = 'category'
+    page_title = ""
+
+    def get_object(self):
+        category_slug = self.kwargs['hierarchy'].split('/')
+        parent = None
+        root = self.model.objects.all()
+
+        print(category_slug)
+        for slug in category_slug:
+            parent = get_object_or_404(root, slug=slug, parent=parent)
+        return parent
 
 
 class PostDetailView(PageTitleMixin, DetailView):

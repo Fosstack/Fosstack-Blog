@@ -53,6 +53,7 @@ THIRD_PARTY_APPS = (
     'mptt',
     'tinymce',
     'widget_tweaks',
+    'taggit',
 )
 
 PROJECT_APPS = (
@@ -153,8 +154,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, "../static_cdn")
 MEDIA_ROOT = os.path.join(BASE_DIR, "../media_cdn")
 
-# Crispy form
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 INTERNAL_IPS = ('127.0.0.1', 'localhost')
 
@@ -192,3 +191,7 @@ TINYMCE_DEFAULT_CONFIG = {
 MPTT_ADMIN_LEVEL_INDENT = 20
 DISQUS_API_KEY = config('DISQUS_API_KEY')
 DISQUS_WEBSITE_SHORTNAME = config('DISQUS_WEBSITE_SHORTNAME')
+
+
+TAGGIT_CASE_INSENSITIVE = True  # taggit
+CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Crispy form
