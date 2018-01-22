@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 {% load static  %}
 
-{% block head_title %} {{  category.name }} {% endblock %}
-
+{% block title %}
+  {{ page_title }} | {{ block.super }}
+{% endblock title %}
 
 {% block header %}
     <!-- Page Header -->
@@ -28,7 +29,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4 col-md-5 mx-auto">
-        <div class="card">
+        <div class="shadow card">
           <a href={{ i.get_absolute_url }}>
           <div class="card-body">
             <h5 style="text-align:center" class="card-title">{{ i.name | capfirst }}</h5>

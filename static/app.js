@@ -17,7 +17,7 @@ var c=function(){var a={},b=!1,c=0,d=arguments.length;"[object Boolean]"===Objec
 
 $(document).ready(function(){
     $(".post_detail img").each(function(){
-        $(this).addClass("img-fluid");
+        $(this).addClass("img-fluid shadow");
     });
 });
 
