@@ -63,7 +63,7 @@ $.ajaxSetup({
         var $formData = $(this).serialize()
         $.ajax({
             method: "POST",
-            url: '/subscribe',
+            url: '/subscribe/',
             data: $formData,
             success: handleFormSuccess,
             error: handleFormError,

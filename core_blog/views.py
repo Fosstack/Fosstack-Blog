@@ -54,7 +54,7 @@ class CategoryDetailView(DetailView):
     def get_object(self):
         category_slug = self.kwargs['hierarchy'].split('/')
         parent = None
-        root = self.model.objects.all()
+        root = self.model.objects.prefetch_related('post_set').all()
 
         for slug in category_slug:
             parent = get_object_or_404(root, slug=slug, parent=parent)

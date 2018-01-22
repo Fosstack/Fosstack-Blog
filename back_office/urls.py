@@ -11,11 +11,11 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('contact', views.CreateContactView.as_view(), name='contact'),
+    path('contact/', views.CreateContactView.as_view(), name='contact'),
     path('robots.txt', lambda r: HttpResponse(
         'User-agent: *\nDisallow:', content_type="text/plain")
     ),
-    path('subscribe', views.SubscribeView.as_view(), name='subscribe'),
+    path('subscribe/', views.SubscribeView.as_view(), name='subscribe'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap')
 ]
