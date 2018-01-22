@@ -35,7 +35,7 @@ class ListPostView(ListView):
             result = result.filter(
                 Q(title__icontains=query) |
                 Q(content__icontains=query) |
-                Q(author__icontains=query)
+                Q(writer__icontains=query)
             )
         try:
             tag = self.kwargs['tag']
@@ -46,7 +46,7 @@ class ListPostView(ListView):
         return result
 
 
-class CategoryDetailView(DetailView):
+class CategoryDetailView(PageTitleMixin, DetailView):
     model = models.Category
     context_object_name = 'category'
     page_title = ""
@@ -55,9 +55,9 @@ class CategoryDetailView(DetailView):
         category_slug = self.kwargs['hierarchy'].split('/')
         parent = None
         root = self.model.objects.prefetch_related('post_set').all()
-
         for slug in category_slug:
             parent = get_object_or_404(root, slug=slug, parent=parent)
+        self.page_title = str(parent).capitalize()
         return parent
 
 
