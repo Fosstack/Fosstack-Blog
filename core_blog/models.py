@@ -16,12 +16,22 @@ class PostManager(models.Manager):
         return super().filter(draft=False).filter(publish__lte=date.today())
 
 
+post_type_choices = (
+    ('article', 'article'),
+    ('tip', 'tip'),
+    ('snippet', 'snippet'),
+)
+
+
 class Post(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField(max_length=250, blank=True, null=True)
     category = TreeForeignKey(
         'Category', null=True, blank=True, on_delete=models.SET_NULL
         )
+    post_type = models.CharField(
+        max_length=10, choices=post_type_choices, null=True, blank=True,
+        default="article")
     content = HTMLField('Content')
     slug = models.SlugField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
