@@ -4,7 +4,7 @@
 {% block head_title %} {{  category.name }} {% endblock %}
 
 
- {% block header %}
+{% block header %}
     <!-- Page Header -->
     <header class="masthead" style="background-image: url({% static 'core_blog/img/home-bg1.jpg' %} )">
       <div class="overlay"></div>
@@ -18,25 +18,26 @@
         </div>
       </div>
     </header>
-    {% endblock header %}
+{% endblock header %}
 
 
 {% block content %}
 
 {% if  category.children.all %}
-    {% for i in category.children.all %}
-        <a href="{{ i.slug }}">  </a><br>
+  {% for i in category.children.all %}
+  <div class="container">
     <div class="row">
-        <div class="col-lg-4 col-md-5 mx-auto">
+      <div class="col-lg-4 col-md-5 mx-auto">
         <div class="card">
-         <a href={{ i.get_absolute_url }}
-         <div class="card-body">
+          <a href={{ i.get_absolute_url }}>
+          <div class="card-body">
             <h5 style="text-align:center" class="card-title">{{ i.name | capfirst }}</h5>
           </div>
-        </a>
+          </a>
         </div>
         </div>
     </div>
+  </div>
     {% endfor %}
 {% endif %}
 
