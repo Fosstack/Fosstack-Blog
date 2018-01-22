@@ -25,9 +25,9 @@
 {% block content %}
 
 {% if  category.children.all %}
-  {% for i in category.children.all %}
   <div class="container">
-    <div class="row">
+  <div class="row">
+  {% for i in category.children.all %}
       <div class="col-lg-4 col-md-5 mx-auto">
         <div class="shadow card">
           <a href={{ i.get_absolute_url }}>
@@ -37,9 +37,9 @@
           </a>
         </div>
         </div>
+    {% endfor %}
     </div>
   </div>
-    {% endfor %}
 {% endif %}
 
     {% if category.post_set.all %}
