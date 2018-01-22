@@ -28,10 +28,11 @@ class Post(models.Model):
     description = models.TextField(max_length=250, blank=True, null=True)
     category = TreeForeignKey(
         'Category', null=True, blank=True, on_delete=models.SET_NULL
-        )
+    )
     post_type = models.CharField(
-        max_length=10, choices=post_type_choices, null=True, blank=True,
-        default="article")
+        max_length=10, choices=post_type_choices,
+        null=True, blank=True, default='article'
+    )
     content = HTMLField('Content')
     slug = models.SlugField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -41,9 +42,8 @@ class Post(models.Model):
     hits = models.IntegerField(default=0)
     draft = models.BooleanField(default=True)
     author = models.ForeignKey(
-            settings.AUTH_USER_MODEL, default=1,
-            on_delete=models.SET_DEFAULT
-        )
+        settings.AUTH_USER_MODEL, default=1, on_delete=models.SET_DEFAULT
+    )
     tags = TaggableManager()
     objects = PostManager()
 
@@ -66,7 +66,7 @@ class Category(MPTTModel):
     parent = TreeForeignKey(
         'self', null=True, blank=True, related_name='children',
         db_index=True, on_delete=models.CASCADE
-        )
+    )
     slug = models.SlugField()
 
     class Meta:
