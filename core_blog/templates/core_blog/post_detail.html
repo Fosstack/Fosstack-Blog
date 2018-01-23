@@ -21,7 +21,7 @@
                 {% endif %}
               <h2 class="subheading">{{ post.description }}</h2>
               <span class="meta">Posted by
-                <a href="#">{{ post.author|capfirst }}</a>
+                <a href="#">{{ post.author__username|capfirst }}</a>
                 on {{ post.publish|date:'F d, Y' }}
                 {% if post.draft  %}
                   <span style="color: red">Draft</span>
