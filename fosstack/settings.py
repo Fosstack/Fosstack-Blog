@@ -32,8 +32,11 @@ SITE_ID = 1
 
 # Application definition
 
+THIRD_PARTY_PREPEND = (
+    'jet',  # App that should be apper before other apps
+)
+
 INTERNAL_APPS = (
-    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,22 +49,20 @@ INTERNAL_APPS = (
 
 THIRD_PARTY_APPS = (
     'crispy_forms',
-    'debug_toolbar',
     'django_extensions',
     'disqus',
     'filebrowser',
     'mptt',
+    'taggit',
     'tinymce',
     'widget_tweaks',
-    'taggit',
 )
 
 PROJECT_APPS = (
-    'core_blog',
     'back_office',
+    'core_blog',
 )
 
-INSTALLED_APPS = INTERNAL_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,7 +72,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'fosstack.urls'
@@ -195,3 +195,11 @@ DISQUS_WEBSITE_SHORTNAME = config('DISQUS_WEBSITE_SHORTNAME')
 
 TAGGIT_CASE_INSENSITIVE = True  # taggit
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Crispy form
+
+if DEBUG:
+    THIRD_PARTY_APPS += ('debug_toolbar',)
+    MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+
+INSTALLED_APPS = (
+    THIRD_PARTY_PREPEND + INTERNAL_APPS + THIRD_PARTY_APPS + PROJECT_APPS
+)
