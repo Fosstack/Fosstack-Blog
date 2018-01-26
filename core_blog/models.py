@@ -56,8 +56,8 @@ class Post(models.Model):
         return reverse("blog:post_detail", kwargs={"slug": self.slug})
 
     @property
-    def in_future(self):
-        return (self.publish > date.today()) and not self.draft
+    def is_published(self):
+        return not self.draft and self.publish <= date.today()
 
     class Meta:
         ordering = ['-publish']

@@ -39,7 +39,7 @@
             <div class="post-heading">
               <h1>{{ post.title }}</h1>
               <h6 class="post-subtitle">
-                {% if post.in_future %}
+                {% if post.is_published %}
                   <span style="color: orange">future Post</span>
                 {% endif %}
               <h2 class="subheading">{{ post.description }}</h2>

@@ -46,14 +46,12 @@ class ListPostView(ListView):
         return result
 
 
-
 class ListTipView(ListView):
     model = models.Post
     context_object_name = 'posts'
     paginate_by = 7
 
     def get_queryset(self):
-        print(self.kwargs)
         if self.request.user.is_authenticated:
             result = self.model.objects.annotate(
                 writer=F('author__username')
@@ -63,7 +61,6 @@ class ListTipView(ListView):
                 writer=F('author__username')
             ).filter(post_type='tip')
         return result
-
 
 
 class CategoryDetailView(PageTitleMixin, DetailView):
@@ -89,13 +86,18 @@ class PostDetailView(PageTitleMixin, DetailView):
     def get_object(self, queryset=None):
         slug = self.kwargs['slug']
         try:
-            post = self.model.objects.values(
+            post = self.model.objects.only(
                 'title', 'description', 'publish', 'draft',
                 'author__username', 'content', 'slug'
                 ).get(slug=slug)
+            if (
+                not post.is_published and
+                not self.request.user.is_authenticated
+            ):
+                raise Http404
         except self.model.DoesNotExist:
             raise Http404
-        self.page_title = post['title']
+        self.page_title = post.title
         return post
 
 
