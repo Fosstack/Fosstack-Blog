@@ -12,6 +12,9 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('tag/<slug:tag>/', views.ListPostView.as_view(), name="tag"),
 
+    path('tips/', views.ListTipView.as_view(), name="tip_list"),
+    path('tips/<slug:slug>/', views.PostDetailView.as_view(), name="tip_detail"),
+
     path('category/<hierarchy:hierarchy>/',
          views.CategoryDetailView.as_view(), name='category'),
 
