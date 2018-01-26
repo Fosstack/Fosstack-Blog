@@ -19,8 +19,8 @@
     <meta name="msapplication-navbutton-color" content="#FAFAFA">
     <meta name="apple-mobile-web-app-status-bar-style" content="#FAFAFA">
     {% block seo_tags %}
-    <meta name="description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux, Python and Web Scraping." />
-    <meta name="keywords" content="Linux, Python, FOSS, Web Scraping, python 3, python, linux, unix django" />
+    <meta name="description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux & Python" />
+    <meta name="keywords" content="Linux, Python, FOSS, python 3, python, linux, unix, django" />
     <meta name="robots" content="index, follow">
     <meta name="revisit-after" content="3 days">
     <!-- python,linux,FOSS -->
@@ -29,11 +29,11 @@
     <meta property="og:type" content="article" />
     <meta property="og:image" content="" />
     <meta property="og:url" content="https://fosstack.com" />
-    <meta property="og:description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux, Python and Web Scraping." />
+    <meta property="og:description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux & Python" />
     <!-- For Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Fosstack Blog" />
-    <meta name="twitter:description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux, Python and tips" />
+    <meta name="twitter:description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux & Python" />
     {% endblock %}
 
     <title>
@@ -43,11 +43,11 @@
     </title>
     <!-- Bootstrap core CSS -->
 
-    <link href="{% static 'core_blog/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'core_blog/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
     <!-- Custom styles for this template -->
-    <link href="{% static 'core_blog/css/clean-blog.min.css' %}" rel="stylesheet">
-    <link async href="{% static 'app.min.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
-    <link async href="{% static 'core_blog/css/github.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link href="{% static 'core_blog/css/clean-blog.min.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link href="{% static 'app.min.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+    <link href="{% static 'core_blog/css/github.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
     
     <!-- Custom fonts for this template -->
     <link href="{% static 'core_blog/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" media="none" onload="if(media!='all')media='all'">
@@ -56,6 +56,7 @@
     
     {% block css %}
     {% endblock css %}
+
 
   </head>
 
@@ -96,7 +97,7 @@
     <script src="{% static 'core_blog/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'core_blog/js/clean-blog.min.js' %}"></script>
     <script src="{% static 'app.min.js' %}"></script>
-    <script async src="{% static 'core_blog/js/highlight.pack.js' %}"></script>
+    <script src="{% static 'core_blog/js/highlight.pack.js' %}"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     {% if messages %}
@@ -115,3 +116,5 @@
   </body>
 
 </html>
+
+

@@ -6,7 +6,30 @@
   {{ page_title }} | {{ block.super }}
 {% endblock title %}
 
+{% block seo_tags %}
+    <meta name="title" content="{{ page_title }}" >
+    <meta name="description" content="{{ post.description }}" >
+    <meta name="keywords" content="python" >
+    <meta name="author" content="{{ post.author__username }}">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="3 days">
+    <!-- python,linux,FOSS -->
+    <!-- For Facebook -->
+    <meta property="og:title" content="Fosstack Blog" />
+    <meta property="og:type" content="article" />
+<!--       <meta property="og:image" content="" /> -->
+    <meta property="og:url" content="{{ post.get_absolute_url }}" />
+    <meta property="og:description" content="{{ post.description }}" />
+    <!-- For Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ post.title }}" />
+    <meta name="twitter:description" content="{{ post.description }}" />
+<!--       <meta name="twitter:image" content="{{ post.cover_photo.url }}" />-->
+ {% endblock %}
+
+
 {% block header %}
+
   <!-- Page Header -->
     <header class="masthead" style="background-color:cyan; )">
       <div class="overlay"></div>
