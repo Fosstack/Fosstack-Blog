@@ -46,6 +46,26 @@ class ListPostView(ListView):
         return result
 
 
+
+class ListTipView(ListView):
+    model = models.Post
+    context_object_name = 'posts'
+    paginate_by = 7
+
+    def get_queryset(self):
+        print(self.kwargs)
+        if self.request.user.is_authenticated:
+            result = self.model.objects.annotate(
+                writer=F('author__username')
+            ).filter(post_type='tip')
+        else:
+            result = self.model.objects.active().annotate(
+                writer=F('author__username')
+            ).filter(post_type='tip')
+        return result
+
+
+
 class CategoryDetailView(PageTitleMixin, DetailView):
     model = models.Category
     context_object_name = 'category'
