@@ -86,10 +86,7 @@ class PostDetailView(PageTitleMixin, DetailView):
     def get_object(self, queryset=None):
         slug = self.kwargs['slug']
         try:
-            post = self.model.objects.only(
-                'title', 'description', 'publish', 'draft',
-                'author__username', 'content', 'slug'
-                ).get(slug=slug)
+            post = self.model.objects.select_related('author').get(slug=slug)
             if (
                 not post.is_published and
                 not self.request.user.is_authenticated
