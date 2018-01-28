@@ -22,11 +22,11 @@ class ListPostView(ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             result = self.model.objects.annotate(
-                writer=F('author__username')
+                writer=F('author__first_name')
             )
         else:
             result = self.model.objects.active().annotate(
-                writer=F('author__username')
+                writer=F('author__first_name')
             )
 
         # search filter
