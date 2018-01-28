@@ -45,8 +45,8 @@
               <h2 class="subheading">{{ post.description }}</h2>
               <span class="meta">Posted by
                 <a href="#">{{ post.author.first_name|capfirst }}</a>
-                on {{ post.publish|date:'F d, Y' }}
-                <i class="fa fa-eye" aria-hidden="true"></i><span id="hits"> {{ post.view_count }}</span> Views
+                on {{ post.publish|date:'F d, Y' }}&nbsp;&nbsp;
+                <i class="fa fa-eye" aria-hidden="true"></i><span id="hits"> {{ post.view_count }}</span> views
                 {% if post.draft  %}
                   <span style="color: red">Draft</span>
                 {% endif %}
