@@ -69,7 +69,7 @@
       <div class="container">
         <div class="row">
           <div class="post_detail col-lg-8 col-md-10 mx-auto">
-            {{ post.content | safe }}
+            <span id="the_content">{{ post.content | safe }} </span>
             {% include "core_blog/blocks/social.html" %}
             {% disqus_show_comments %}
           </div>
