@@ -54,11 +54,11 @@ class ListTipView(ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             result = self.model.objects.annotate(
-                writer=F('author__username')
+                writer=F('author__first_name')
             ).filter(post_type='tip')
         else:
             result = self.model.objects.active().annotate(
-                writer=F('author__username')
+                writer=F('author__first_name')
             ).filter(post_type='tip')
         return result
 
@@ -82,6 +82,7 @@ class PostDetailView(PageTitleMixin, DetailView):
     model = models.Post
     context_object_name = 'post'
     page_title = ''
+    post = None
 
     def get_object(self, queryset=None):
         slug = self.kwargs['slug']
@@ -95,7 +96,17 @@ class PostDetailView(PageTitleMixin, DetailView):
         except self.model.DoesNotExist:
             raise Http404
         self.page_title = post.title
+        self.post = post
         return post
+
+    def get_context_data(self, **kwargs):
+        session_key = f'viewed_post_{self.post.pk}'
+        if not self.request.session.get(session_key, False):
+            self.post.view_count = F('view_count') + 1
+            self.post.save()
+            self.post.refresh_from_db()
+            self.request.session[session_key] = True
+        return super().get_context_data(**kwargs)
 
 
 class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):

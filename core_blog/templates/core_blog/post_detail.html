@@ -46,6 +46,7 @@
               <span class="meta">Posted by
                 <a href="#">{{ post.author.first_name|capfirst }}</a>
                 on {{ post.publish|date:'F d, Y' }}
+                <i class="fa fa-eye" aria-hidden="true"></i><span id="hits"> {{ post.view_count }}</span> Views
                 {% if post.draft  %}
                   <span style="color: red">Draft</span>
                 {% endif %}

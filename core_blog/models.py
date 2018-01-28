@@ -39,7 +39,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     publish = models.DateField(auto_now=False, auto_now_add=False,)
     read_time = models.IntegerField(default=0)
-    hits = models.IntegerField(default=0)
+    view_count = models.PositiveIntegerField(default=0)
     draft = models.BooleanField(default=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, default=1, on_delete=models.SET_DEFAULT
