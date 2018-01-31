@@ -18,6 +18,7 @@
     <meta name="theme-color" content="#c5c5c5">
     <meta name="msapplication-navbutton-color" content="#FAFAFA">
     <meta name="apple-mobile-web-app-status-bar-style" content="#FAFAFA">
+
     {% block seo_tags %}
     <meta name="description" content="At Fosstack we provide tutorials, news, security tips about FOSS world with focus on Linux & Python" />
     <meta name="keywords" content="Linux, Python, FOSS, python 3, python, linux, unix, django" />
@@ -41,8 +42,9 @@
       Fosstack Blog
     {% endblock title %}
     </title>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico" />
     <!-- Bootstrap core CSS -->
-
     <link href="{% static 'core_blog/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{% static 'core_blog/css/clean-blog.min.css' %}" rel="stylesheet">
