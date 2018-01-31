@@ -2,6 +2,19 @@
 {% load static %}
 {% load disqus_tags %}
 
+{% block css %}
+  <style>
+    #bg{
+      background: #ee0979;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ff6a00, #ee0979);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    #ov{
+      background-color: transparent !important;
+    }
+  </style>
+{% endblock css %}
+
 {% block title %}
   {{ page_title }} | {{ block.super }}
 {% endblock title %}
@@ -31,8 +44,8 @@
 {% block header %}
 
   <!-- Page Header -->
-    <header class="masthead" style="background-color:cyan; )">
-      <div class="overlay"></div>
+    <header class="masthead" id="bg">
+      <div class="overlay" id="ov"></div>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
