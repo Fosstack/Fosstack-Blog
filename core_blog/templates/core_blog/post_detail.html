@@ -84,7 +84,10 @@ background: linear-gradient(to right, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, F
           <div class="post_detail col-lg-8 col-md-10 mx-auto">
             <span id="the_content">{{ post.content | safe }} </span>
             {% include "core_blog/blocks/social.html" %}
-            {% disqus_show_comments %}
+            {% if post.is_published %}
+                  {% disqus_show_comments %}
+            {% endif %}
+
           </div>
         </div>
       </div>
