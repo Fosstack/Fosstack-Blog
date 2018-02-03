@@ -2,7 +2,12 @@
 
 <div class="button-group">
                 <a target="_blank"  href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}{{ post.get_absolute_url }}" class="social facebook"><img width="40px"  src="{% static 'images/social/facebook-min.png'%}"></a>
+
                 <a target="_blank"  href="https://twitter.com/intent/tweet?url={{request.get_host}}{{ post.get_absolute_url }}&via={{ post.author }}&text={{ post.title }}&original_referer=https://fosstack.com{{ post.get_absolute_url }}&hashtags={{ post.tags.all }}" class="social twitter"><img width="40px" src="{% static 'images/social/twitter-min.png'%}"></a>
+
                 <a target="_blank"  href="https://www.linkedin.com/shareArticle?mini=true&url={{request.get_host}}{{ post.get_absolute_url }}&title={{ post.title }}&summary={{ post.description }}&source=" class="social linkedin"><img width="40px" src="{% static 'images/social/linkedin-min.png'%}"></a>
+
+                <a target="_blank"  onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location) + '&title={{ post.title }}'; return false" href="//www.reddit.com/submit" class="social reddit"><img width="40px" src="{% static 'images/social/reddit-icon.svg'%}"></a>
+
 </div>
 <br>
