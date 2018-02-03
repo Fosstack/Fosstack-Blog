@@ -5,6 +5,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=20)
     email = models.EmailField()
     message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = 'Feedbacks'
