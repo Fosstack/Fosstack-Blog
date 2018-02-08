@@ -38,6 +38,10 @@
               {% else %}
                 <br><hr><br>
               {% endif %}
+          {% empty %}
+              <div class="alert alert-warning">
+                <p class="text-center"> Nothing matched your given query </p>
+              </div>
           {% endfor %}
           <!-- Pager -->
           <div class="d-flex justify-content-between">

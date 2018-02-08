@@ -16,7 +16,7 @@ var c=function(){var a={},b=!1,c=0,d=arguments.length;"[object Boolean]"===Objec
 
 
 $(document).ready(function(){
-    $(".post_detail img").each(function(){
+    $("#the_content img").each(function(){
         $(this).addClass("img-fluid shadow");
     });
 
