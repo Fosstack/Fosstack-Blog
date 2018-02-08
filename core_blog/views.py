@@ -31,9 +31,8 @@ class ListPostView(ListView):
         query = self.request.GET.get('q')
         if query:
             result = result.filter(
-                Q(title__icontains=query) |
-                Q(content__icontains=query) |
-                Q(writer__icontains=query))
+                Q(title__icontains=query) | Q(content__icontains=query)
+                | Q(writer__icontains=query))
 
         # filter by tag
         if 'tag' in self.kwargs:
@@ -99,7 +98,12 @@ class PostDetailView(PageTitleMixin, DetailView):
             self.post.save()
             self.post.refresh_from_db()
             self.request.session[session_key] = True
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        context['related_posts'] = models.Post.objects.active().filter(
+            Q(category=self.post.category) |
+            Q(author=self.post.author)
+            ).exclude(pk=self.post.pk)
+        return context
 
 
 class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
