@@ -22,12 +22,10 @@ class ListPostView(ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             result = self.model.objects.annotate(
-                writer=F('author__first_name')
-            )
+                writer=F('author__first_name'))
         else:
             result = self.model.objects.active().annotate(
-                writer=F('author__first_name')
-            )
+                writer=F('author__first_name'))
 
         # search filter
         query = self.request.GET.get('q')
@@ -35,14 +33,13 @@ class ListPostView(ListView):
             result = result.filter(
                 Q(title__icontains=query) |
                 Q(content__icontains=query) |
-                Q(writer__icontains=query)
-            )
-        try:
+                Q(writer__icontains=query))
+
+        # filter by tag
+        if 'tag' in self.kwargs:
             tag = self.kwargs['tag']
-        except KeyError:
-            pass
-        else:
             result = result.filter(tags__name__in=[tag])
+
         return result
 
 
@@ -54,12 +51,10 @@ class ListTipView(ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             result = self.model.objects.annotate(
-                writer=F('author__first_name')
-            ).filter(post_type='tip')
+                writer=F('author__first_name')).filter(post_type='tip')
         else:
             result = self.model.objects.active().annotate(
-                writer=F('author__first_name')
-            ).filter(post_type='tip')
+                writer=F('author__first_name')).filter(post_type='tip')
         return result
 
 
@@ -88,10 +83,8 @@ class PostDetailView(PageTitleMixin, DetailView):
         slug = self.kwargs['slug']
         try:
             post = self.model.objects.select_related('author').get(slug=slug)
-            if (
-                not post.is_published and
-                not self.request.user.is_authenticated
-            ):
+            if (not post.is_published
+                    and not self.request.user.is_authenticated):
                 raise Http404
         except self.model.DoesNotExist:
             raise Http404
@@ -127,10 +120,8 @@ class PostUpdateView(IsStaffUserMixin, PageTitleMixin, UpdateView):
     template_name = 'core_blog/post_form.html'
 
     def get(self, request, *args, **kwargs):
-        if (
-            request.user.is_superuser or
-            request.user == self.get_object().author
-        ):
+        if (request.user.is_superuser
+                or request.user == self.get_object().author):
             return super().get(request, *args, **kwargs)
         raise Http404
 
