@@ -7,7 +7,7 @@
     #bg{
       background: #ee0979;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #ff6a00, #ee0979);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right,#30B58B,#22D0BA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
     #ov{
       background-color: transparent !important;
@@ -86,6 +86,28 @@ background: linear-gradient(to right, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, F
             {% include "core_blog/blocks/social.html" %}
             {% if post.is_published %}
                   {% disqus_show_comments %}
+            {% endif %}
+
+
+            {% if related_posts %}
+            <br><br>
+            <div class="row">
+              <div class="col-lg-8 col-md-10 mx-auto">
+                <br><h4 class="text-center">Related Posts</h4><br>
+                {% for post in related_posts %}
+                    <div class="post-preview">
+                      <a href="{{ post.get_absolute_url }}">
+                        <h5 class="text-center post-subtitle">
+                          {{ post.title }}
+                        </h5>
+                      </a>
+                    </div>
+                  {% if not forloop.last %}
+                      <hr>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
             {% endif %}
 
           </div>
