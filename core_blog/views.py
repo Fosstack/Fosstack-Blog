@@ -1,13 +1,13 @@
 from django.db.models import F, Q
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
-from django.views.generic import TemplateView
 from django.views.generic.edit import UpdateView
-from django.shortcuts import get_object_or_404
+from django.views.generic.list import ListView
 
 from . import forms
 from . import models
@@ -102,7 +102,7 @@ class PostDetailView(PageTitleMixin, DetailView):
         context['related_posts'] = models.Post.objects.active().filter(
             Q(category=self.post.category) |
             Q(author=self.post.author)
-            ).exclude(pk=self.post.pk)
+            ).exclude(pk=self.post.pk).order_by('-view_count')
         return context
 
 
