@@ -1,5 +1,5 @@
 from django.db.models import F, Q
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
@@ -111,6 +111,11 @@ class CreatePostView(IsStaffUserMixin, PageTitleMixin, CreateView):
     page_title = 'Create Awesome Post'
     template_name = 'core_blog/post_form.html'
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.author = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 class AboutView(PageTitleMixin, TemplateView):
     page_title = 'About'

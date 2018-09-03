@@ -13,7 +13,11 @@
                   </h2>
                     <h6 class="post-subtitle">
                       {% if not post.is_published %}
-                        <span style="color: orange">future Post</span>
+                        {% if not post.draft %}
+                          <span style="color: orange">future Post</span>
+                        {% else %}
+                          <span style="color: red">Draft</span>
+                        {% endif %}
                       {% endif %}
                   </h6>
                   <h3 class="post-subtitle">
@@ -23,9 +27,6 @@
                 <p class="post-meta">Posted by
                   <a href="#">{{ post.writer|capfirst }}</a>
                    on {{ post.publish|date:'F d, Y' }}
-                   {% if post.draft  %}
-                        <span style="color: red">Draft</span>
-                   {% endif %}
                    {% if user.is_superuser or user == post.writer %}
                      &nbsp;<a href="{% url 'blog:post_update' post.slug %}">
                       <i class="fa fa-pencil" aria-hidden="true"></i>

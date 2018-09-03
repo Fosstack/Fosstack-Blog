@@ -52,17 +52,18 @@ background: linear-gradient(to right,#30B58B,#22D0BA); /* W3C, IE 10+/ Edge, Fir
             <div class="post-heading">
               <h1>{{ post.title }}</h1>
               <h6 class="post-subtitle">
-                {% if not post.is_published %}
-                  <span style="color: orange">future Post</span>
-                {% endif %}
               <h2 class="subheading">{{ post.description }}</h2>
+                {% if not post.is_published %}
+                  {% if not post.draft %}
+                    <span style="color: black">future Post</span>
+                  {% else %}
+                    <span style="color: red">Draft</span>
+                  {% endif %}
+                {% endif %}
               <span class="meta">Posted by
                 <a href="#">{{ post.author.first_name|capfirst }}</a>
                 on {{ post.publish|date:'F d, Y' }}&nbsp;&nbsp;
                 <span id="hits" style="display:inline-block"> <i class="fa fa-eye" aria-hidden="true"></i> {{ post.view_count }} views</span>
-                {% if post.draft  %}
-                  <span style="color: red">Draft</span>
-                {% endif %}
                 {% if user.is_superuser or user.username == post.author__username %}
                      &nbsp;<a href="{% url 'blog:post_update' post.slug %}">
                       <i class="fa fa-pencil" aria-hidden="true"></i>
